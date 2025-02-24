@@ -1,4 +1,5 @@
 import Titolo from "./components/Header"
+import PostForm from "./components/PostForm"
 import './App.css'
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
       <Titolo />
+      <PostForm />
     </>
   )
 }
