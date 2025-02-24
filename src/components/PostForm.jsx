@@ -40,12 +40,27 @@ function handleFormData(e) {
     // Se il campo è "tags", lo trasformiamo in un array separato da virgole
     const value = e.target.name === "tags" ? e.target.value.split(",") : e.target.value;
 
-    // Se si volesse gestire un checkbox
-    // const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
 
     // Aggiorniamo il formData con i nuovi valori
     setFormData((currentFormData) => ({
         ...currentFormData,
         [e.target.name]: value,
     }));
+}
+
+// Funzione per gestire l'invio del form e aggiungere un nuovo post
+function handleSubmit(e) {
+    e.preventDefault(); // Previene il comportamento predefinito del form (refresh della pagina)
+
+    // Effettuiamo una richiesta POST per aggiungere un nuovo post
+    axios.post("http://localhost:3000/posts", formData)
+        .then(res => {
+            // Aggiorniamo la lista dei post con il nuovo post restituito dall'API
+            setPosts((currentPosts) => [...currentPosts, res.data]);
+        })
+        .catch(err => console.log(err));
+
+    // Resettiamo il form dopo l'invio
+    setFormData(initialFormData);
 }
