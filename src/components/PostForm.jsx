@@ -78,3 +78,74 @@ function deletePost(idPost) {
         })
         .catch(err => console.log(err));
 }
+
+// Contenuto del componente
+return (
+    <>
+        {/* Form per l'aggiunta di un nuovo post */}
+        <form id="formPost" action="#" onSubmit={handleSubmit}>
+            {/* Campo per il titolo */}
+            <input
+                type="text"
+                name="title"
+                onChange={handleFormData}
+                value={formData.title}
+                placeholder="Inserisci titolo post"
+            />
+
+            {/* Campo per il contenuto del post */}
+            <textarea
+                name="content"
+                onChange={handleFormData}
+                value={formData.content}
+                placeholder="Contenuto post"
+            ></textarea>
+
+            {/* Campo per l'immagine del post */}
+            <input
+                type="text"
+                name="image"
+                onChange={handleFormData}
+                value={formData.image}
+                placeholder="URL immagine post"
+            />
+
+            {/* Campo per i tag del post */}
+            <input
+                type="text"
+                name="tags"
+                onChange={handleFormData}
+                value={formData.tags}
+                placeholder="Tag (separati da virgole)"
+            />
+
+
+
+            {/* Pulsante per inviare il form */}
+            <button className="addButton">Aggiungi</button>
+        </form>
+
+        {/* Sezione che mostra i post esistenti */}
+        <div className="containerPost">
+            {posts.map((post) => (
+                <div className="postItem" key={post.id}>
+                    <h2>{post.title}</h2>
+                    {/* <h3>{post.autore}</h3> */}
+                    <p className="contenuto">{post.content}</p>
+                    {/* Visualizzazione dell'immagine */}
+                    <img src={post.image} alt={post.title} />
+                    {/* Visualizzazione dei tag separati da virgole */}
+                    <p>{post.tags.join(', ')}</p>
+
+
+                    {/* Pulsante per eliminare il post */}
+                    <button className="deleteButton" onClick={() => deletePost(post.id)}>Cancella</button>
+                </div>
+            ))}
+        </div>
+    </>
+);
+
+
+// Esportazione del componente per l'uso in altri file
+export default PostForm;
