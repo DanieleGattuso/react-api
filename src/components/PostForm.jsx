@@ -31,3 +31,21 @@ const PostForm = () => {
             });
     }
 }
+
+// Effetto che esegue la funzione fetchPosts solo al primo rendering del componente
+useEffect(fetchPosts, []);
+
+// Funzione per aggiornare lo stato formData quando l'utente digita nei campi del form
+function handleFormData(e) {
+    // Se il campo è "tags", lo trasformiamo in un array separato da virgole
+    const value = e.target.name === "tags" ? e.target.value.split(",") : e.target.value;
+
+    // Se si volesse gestire un checkbox
+    // const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
+    // Aggiorniamo il formData con i nuovi valori
+    setFormData((currentFormData) => ({
+        ...currentFormData,
+        [e.target.name]: value,
+    }));
+}
