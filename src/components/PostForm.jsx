@@ -64,3 +64,17 @@ function handleSubmit(e) {
     // Resettiamo il form dopo l'invio
     setFormData(initialFormData);
 }
+
+// Funzione per eliminare un post
+function deletePost(idPost) {
+    // Filtriamo la lista dei post per escludere quello con l'ID corrispondente
+    const updatePost = posts.filter((post) => post.id !== idPost);
+
+    // Effettuiamo una richiesta DELETE per rimuovere il post dal database
+    axios.delete(`http://localhost:3000/posts/${idPost}`)
+        .then(res => {
+            // Aggiorniamo lo stato con la lista filtrata
+            setPosts(updatePost);
+        })
+        .catch(err => console.log(err));
+}
